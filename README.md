@@ -79,8 +79,6 @@ Unconstrained RandomForest scored 0.5672 with **train PR-AUC of 1.0000** — com
 | PR-AUC | 0.5502 | 0.5179 |
 | ROC-AUC | 0.8931 | 0.8979 |
 
-A 6% PR-AUC drop on an out-of-time split. The model was fit on earlier data and evaluated on later data it never saw, so some degradation is expected — a test score matching cv exactly would be more suspicious than this. ROC-AUC barely moved, which is the same blind spot showing up again.
-
 Test PR-AUC 0.5179 against a test base rate of 0.0344 is roughly **15x random**.
 
 ---
