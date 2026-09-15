@@ -22,7 +22,6 @@ Same model, same 500 reviews, three ways of ordering the queue:
 | by probability | 461 | 0.922 | 7.1% |
 | by probability, then amount | 331 | 0.662 | 18.2% |
 | **by expected value (p × amount)** | **236** | **0.472** | **22.2%** |
-| control — amount only, no model | 8 | 0.016 | 3.3% |
 | perfect model, 500 reviews | — | 1.000 | 53.7% |
 
 Ranking by confidence catches the most frauds but the cheapest ones — median fraud here is **$66.40**, against $68.50 for legitimate transactions. Amount alone carries almost no signal, which the control row confirms.
