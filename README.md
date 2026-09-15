@@ -83,27 +83,6 @@ Test PR-AUC 0.5179 against a test base rate of 0.0344 is roughly **15x random**.
 
 ---
 
-## Things that were tried and cut
-
-Both are in the notebook with the numbers.
-
-**UID reconstruction.** Vesta removed the customer identifier. `day_index - d1` gives the day a card first appeared, constant per card, so `card1 + addr1 + d1n` acts as a fingerprint — the same date-minus-counter trick as SQL gaps-and-islands. Coverage killed it:
-
-| grouping | groups | test coverage |
-|---|---|---|
-| card1 | 12,730 | 98.9% |
-| card1 + addr1 | 34,399 | 86.0% |
-| card1 + addr1 + d1n | 167,111 | 41.6% |
-
-The specific version is NaN for 58% of test rows — cards churn over six months. The coarse version has coverage but isn't a card: `card1` averages 43.6 transactions per value and one value covers 14,932 rows, making it a BIN rather than a cardholder. Its mean is a population average, which defeats the point of a deviation feature.
-
-Either specific and unavailable at test time, or available and meaningless.
-
-**SelectKBest feature filtering.** Scored materially worse. The filter needs complete data, so an imputer has to sit in front of it — which overwrites the informative missingness in the `id_` block that HGB was routing natively. Filters help models that can't ignore irrelevant features; boosters can.
-
-Correlation pruning was kept: 71 V-columns dropped at r > 0.95, via `feature_engine.DropCorrelatedFeatures` fitted on train only.
-
----
 
 ## Selected EDA findings
 
