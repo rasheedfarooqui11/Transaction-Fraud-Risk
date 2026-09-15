@@ -97,13 +97,12 @@ Test PR-AUC 0.5179 against a test base rate of 0.0344 is roughly **15x random**.
 ## Repo
 
 ```
-notebook.ipynb            full analysis, Stage 0 to 7, with outputs
+TR-Notebook.ipynb            full analysis, Stage 0 to 7, with outputs
 dashboard/
   fraud_dashboard.pbix    interactive review-queue dashboard
   screenshot.png
 data/
-  scored_test.csv         118,108 scored test transactions
-  budget_curve.csv        recovery by review budget
+  bi_data.csv         118,108 scored test transactions
 model.pkl                 fitted pipeline
 requirements.txt
 ```
