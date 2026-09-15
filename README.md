@@ -87,7 +87,7 @@ Test PR-AUC 0.5179 against a test base rate of 0.0344 is roughly **15x random**.
 ## Selected EDA findings
 
 - **Missingness is structural, not random.** 12 columns are >90% empty, and every one carries signal. `d7` runs 2.7% fraud when blank against 15.0% when populated.
-- **The V-block was engineered in groups.** 339 V-columns share only 14 distinct missing rates, clustering into 47 correlated groups — consecutive runs go missing on identical rows.
+- **The V-block was engineered in groups.** 
 - **Identity presence.** 25.5% of transactions carry identity data. Fraud rate is 2.13% without, 7.55% with — a 3.5x lift from one binary flag.
 - **Hour of day.** Fraud runs 2.3% at hour 13 and 10.6% at hour 7.
 - **Blanks per row.** Rows with the fewest blanks are 7.89% fraud against 1.58% in the middle bucket. Non-linear, so trees use it and the logistic model doesn't.
@@ -114,11 +114,7 @@ Raw data is not committed. Download from [Kaggle](https://www.kaggle.com/c/ieee-
 
 ## What I'd do with more time
 
-- Nested UID aggregations at multiple granularities, so coarse groups cover the rows fine groups miss. This is where the competition winners got their gains.
 - Proper hyperparameter search. The ladder used near-default parameters throughout.
 - CatBoost, which handles high-cardinality categoricals natively via ordered target statistics.
 - Cost-sensitive thresholding using the real cost of an analyst hour against the real cost of a chargeback, rather than a fixed 500-row budget.
 
-## Production notes
-
-Not built, but the shape: nightly batch scoring, feature-distribution drift monitoring with alerting, quarterly retrain triggered by PR-AUC decay, versioned model artefacts. The 6% out-of-time drop is the argument for the retrain cadence.
